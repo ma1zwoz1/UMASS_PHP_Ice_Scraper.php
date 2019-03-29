@@ -143,7 +143,7 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
                    }   
     }
 
-} else if (strpos($html_base, 'National Weather Service Gray ME') == false){
+ }else if ((strpos($html_base, 'National Weather Service Gray ME') == false) && (strpos($html_base,'Hazardous Weather Outlook') == true)) {
     echo "<br>","No Hazardous Events in Gray Maine At this Hour But There Are Others:", "<br>";
         $text = 'No Hazardous Events in Gray Maine At this Hour But There Are Others:';
            file_put_contents($total_path,$text,FILE_APPEND);
@@ -160,6 +160,22 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
                             }   
             }
 
+  }else if (strpos($html_base,'Hazardous Weather Outlook') == false) {
+    echo "<br>","No Hazardous Events At This Hour", "<br>";
+        $text = 'No Hazardous Events At This Hour';
+           file_put_contents($total_path,$text,FILE_APPEND);
+             foreach($html_base->find('h3') as $h3) {
+                echo $h3,"<br>";
+                    $all_data_h3 = $h3;
+                        file_put_contents($total_path,$all_data_h3,FILE_APPEND);
+                            foreach($html_base->find('pre') as $pre) {
+                                echo $scraped_data_title,"<br>";
+                                    echo $pre,"<br>";;
+                                        $all_data_pre = $pre;
+                                            file_put_contents($total_path,$all_data_pre,FILE_APPEND);
+   
+                            }   
+            }
   }
 /////////////////////////////////////ENG LOGIC////////////////////////////////////////////////
 $html_base->clear(); 
