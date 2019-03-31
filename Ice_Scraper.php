@@ -136,7 +136,7 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
                file_put_contents($total_path,$all_data_h3,FILE_APPEND);
                    foreach($html_base->find('pre') as $pre) {
                       echo $scraped_data_title,"<br>";
-                         echo $pre,"<br>";;
+                         echo $pre,"<br>";
                             $all_data_pre = $pre;
                               file_put_contents($total_path,$all_data_pre,FILE_APPEND);
    
@@ -153,7 +153,7 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
                         file_put_contents($total_path,$all_data_h3,FILE_APPEND);
                             foreach($html_base->find('pre') as $pre) {
                                 echo $scraped_data_title,"<br>";
-                                    echo $pre,"<br>";;
+                                    echo $pre,"<br>";
                                         $all_data_pre = $pre;
                                             file_put_contents($total_path,$all_data_pre,FILE_APPEND);
    
@@ -170,7 +170,7 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
                         file_put_contents($total_path,$all_data_h3,FILE_APPEND);
                             foreach($html_base->find('pre') as $pre) {
                                 echo $scraped_data_title,"<br>";
-                                    echo $pre,"<br>";;
+                                    echo $pre,"<br>";
                                         $all_data_pre = $pre;
                                             file_put_contents($total_path,$all_data_pre,FILE_APPEND);
    
