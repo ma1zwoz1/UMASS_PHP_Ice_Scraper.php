@@ -119,10 +119,6 @@ function scrape_between($data, $start, $end){
 $html= curl_download('https://www.weather.gov/wwamap/wwatxtget.php?cwa=gyx&wwa=all');
 //Strip Web Site Title using Scrape Between Function
 $scraped_data_title = scrape_between($html, "<title>", "</title>");
-//Subset Scraped String for just Hazardous Events
-$start_point = strpos($html, '<h3>Hazardous Weather Outlook</h3>');
-$end_point = strpos($html, '<h3>Hazardous Weather Outlook</h3>', $start_point);
-$html = substr($html, $start_point, $end_point);
 //Create Blank DOM Tree
 $html_base = new simple_html_dom();
 // Load HTML from a string in DOM
@@ -130,11 +126,11 @@ $html_base->load($html);
 //////////////////////////Run Logic and Print to file and screen//////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 if(strpos($html_base, 'National Weather Service Gray ME') == true) { 
-    foreach($html_base->find('h3') as $h3) {
+    foreach($html_base->find('h3[plaintext*="Hazardous Weather Outlook"]')  as $h3) { //Subset Scraped String for just Hazardous Events
        echo $h3,"<br>";
             $all_data_h3 = $h3;
                file_put_contents($total_path,$all_data_h3,FILE_APPEND);
-                   foreach($html_base->find('pre') as $pre) {
+                   foreach($html_base->find('pre[plaintext*="Hazardous Weather Outlook National Weather Service Gray"]') as $pre) { //Subset Scraped String for just Gray
                       echo $scraped_data_title,"<br>";
                          echo $pre,"<br>";
                             $all_data_pre = $pre;
@@ -147,7 +143,7 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
     echo "<br>","No Hazardous Events in Gray Maine At this Hour But There Are Others:", "<br>";
         $text = 'No Hazardous Events in Gray Maine At this Hour But There Are Others:';
            file_put_contents($total_path,$text,FILE_APPEND);
-             foreach($html_base->find('h3') as $h3) {
+             foreach($html_base->find('h3[plaintext*="Hazardous Weather Outlook"]')  as $h3) { //Subset Scraped String for just Hazardous Events
                 echo $h3,"<br>";
                     $all_data_h3 = $h3;
                         file_put_contents($total_path,$all_data_h3,FILE_APPEND);
