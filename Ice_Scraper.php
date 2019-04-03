@@ -125,7 +125,7 @@ $html_base = new simple_html_dom();
 $html_base->load($html);
 //////////////////////////Run Logic and Print to file and screen//////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
-if(strpos($html_base, 'National Weather Service Gray ME') == true) { 
+if(strpos($html_base, 'Hazardous Weather Outlook National Weather Service Gray') == true)  { 
     foreach($html_base->find('h3[plaintext*="Hazardous Weather Outlook"]')  as $h3) { //Subset Scraped String for just Hazardous Events
        echo $h3,"<br>";
             $all_data_h3 = $h3;
@@ -139,7 +139,7 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
                    }   
     }
 
- }else if ((strpos($html_base, 'National Weather Service Gray ME') == false) && (strpos($html_base,'Hazardous Weather Outlook') == true)) {
+ }else if ((strpos($html_base, 'Hazardous Weather Outlook National Weather Service Gray') == false) && (strpos($html_base,'Hazardous Weather Outlook') == true)) {
     echo "<br>","No Hazardous Events in Gray Maine At this Hour But There Are Others:", "<br>";
         $text = 'No Hazardous Events in Gray Maine At this Hour But There Are Others:';
            file_put_contents($total_path,$text,FILE_APPEND);
@@ -147,7 +147,7 @@ if(strpos($html_base, 'National Weather Service Gray ME') == true) {
                 echo $h3,"<br>";
                     $all_data_h3 = $h3;
                         file_put_contents($total_path,$all_data_h3,FILE_APPEND);
-                            foreach($html_base->find('pre') as $pre) {
+                            foreach($html_base->find('pre[plaintext*="Hazardous Weather Outlook National Weather Service"]') as $pre) {
                                 echo $scraped_data_title,"<br>";
                                     echo $pre,"<br>";
                                         $all_data_pre = $pre;
